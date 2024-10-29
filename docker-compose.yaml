@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+
+  vtb-backend:
+    image: vtb-backend
+    ports:
+      - "${BACKEND_PORT_EXTERNAL}:${BACKEND_PORT_INTERNAL}"
+    environment:
+      NODE_ENV: ${BACKEND_NODE_ENV}
+      HOST: ${BACKEND_HOST}
+      ADDRESS: ${ADDRESS}
+      SWAGGER_PATH: ${SWAGGER_PATH}
+      PORT: ${BACKEND_PORT_INTERNAL}
+
+      DB_USER: ${DB_USER}
+      DB_HOST: postgres
+      DB_PORT: ${DB_PORT}
+      DB_PASSWORD: ${DB_PASSWORD} 
+      DB_NAME: ${DB_NAME}
+    networks:
+      - default
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: ${DB_USER}      
+      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_DB: ${DB_NAME}   
+    ports:
+      - "${DB_PORT_INTERNAL}:${DB_PORT_EXTERNAL}"                  
+    volumes:
+      - "${POSTGRES_VOLUME}"
+    networks:
+      - default
+
+volumes:
+  postgres_data:                 
+
+networks:
+  postgres_network:    
