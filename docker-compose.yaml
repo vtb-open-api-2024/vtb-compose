@@ -2,7 +2,7 @@ version: '3.8'
 services:
 
   vtb-backend:
-    image: vtb-backend
+    image: vtb-backend:latest
     ports:
       - "${BACKEND_PORT_EXTERNAL}:${BACKEND_PORT_INTERNAL}"
     environment:
@@ -17,6 +17,21 @@ services:
       DB_PORT: ${DB_PORT}
       DB_PASSWORD: ${DB_PASSWORD} 
       DB_NAME: ${DB_NAME}
+
+      JWT_ACCESS: ${JWT_ACCESS}
+      JWT_REFRESH: ${JWT_REFRESH}
+      JWT_RECOVERY: ${JWT_RECOVERY}
+
+      JWT_ACCESS_EXP: ${JWT_ACCESS_EXP}
+      JWT_REFRESH_EXP: ${JWT_REFRESH_EXP}
+      JWT_RECOVERY_EXP: ${JWT_RECOVERY_EXP}
+
+      UCALLER_INIT_CALL_URL: ${UCALLER_INIT_CALL_URL}
+      UCALLER_SECRET_KEY: ${UCALLER_SECRET_KEY}
+      UCALLER_SERVICE_ID: ${UCALLER_SERVICE_ID}
+
+      AES_CIPHER_KEY: ${AES_CIPHER_KEY}
+      AES_CIPHER_IV: ${AES_CIPHER_IV}
     networks:
       - default
 
