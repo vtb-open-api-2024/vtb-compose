@@ -1,6 +1,16 @@
 version: '3.8'
 services:
 
+  nginx:
+    image: nginx:latest
+    build: ./nginx
+    container_name: vtb_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+
   vtb-backend:
     image: vtb-backend:latest
     ports:
@@ -25,6 +35,8 @@ services:
       JWT_ACCESS_EXP: ${JWT_ACCESS_EXP}
       JWT_REFRESH_EXP: ${JWT_REFRESH_EXP}
       JWT_RECOVERY_EXP: ${JWT_RECOVERY_EXP}
+
+      ADMIN_KEY: ${ADMIN_KEY}
 
       UCALLER_INIT_CALL_URL: ${UCALLER_INIT_CALL_URL}
       UCALLER_SECRET_KEY: ${UCALLER_SECRET_KEY}
