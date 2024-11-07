@@ -11,6 +11,13 @@ services:
     networks:
       - default
 
+  vtb-frontend:
+    image: vtb-frontend:latest
+    ports: 
+      - "${FRONTEND_PORT_EXTERNAL}:${FRONTEND_PORT_INTERNAL}"
+    networks:
+      - default
+
   vtb-backend:
     image: vtb-backend:latest
     ports:
